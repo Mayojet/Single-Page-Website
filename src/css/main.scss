@@ -124,3 +124,14 @@ section { scroll-margin-top: 88px; }
 .hero__icon:focus-visible{outline:2px solid #fff;border-radius:10px}
 @media (min-width:1100px){.hero__icon img{width:40px;height:40px}}
 
+
+.home-content{max-width:720px;margin:0 auto;text-align:center}
+.profile-pic{width:150px;height:150px;border-radius:12px;object-fit:cover;border:3px solid #E84A27;display:block;margin:0 auto 12px}
+.fade-in{animation:fadeIn .7s ease both}
+.social{display:flex;gap:18px;justify-content:center;align-items:center;margin-top:14px}
+.social a{display:inline-flex;align-items:center;gap:10px;padding:.55rem .9rem;border-radius:10px;background:rgba(255,255,255,.12);color:#fff;text-decoration:none;font-weight:700;transition:transform .12s ease,box-shadow .12s ease,background .12s ease}
+.social a:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.2);background:rgba(232,74,39,.9)}
+.social-icon{width:22px;height:22px;display:block;filter:drop-shadow(0 1px 4px rgba(0,0,0,.3))}
+@media (min-width:1100px){.social{gap:22px}.social-icon{width:24px;height:24px}}
+
+
