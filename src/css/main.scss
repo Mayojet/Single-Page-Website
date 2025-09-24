@@ -62,20 +62,6 @@ img { max-width: 100%; height: auto; display: block; }
 .progress { height: 3px; background: transparent; }
 #progressBar { display: block; height: 100%; width: 0; background: linear-gradient(90deg, $illini-orange, #3b82f6); }
 
-/* Mobile menu */
-.hamburger { display: none; flex-direction: column; gap: 5px; background: transparent; border: 0; cursor: pointer; }
-.hamburger span { width: 26px; height: 3px; background: #fff; border-radius: 2px; }
-@media (max-width: 768px) {
-  .hamburger { display: flex; }
-  .nav-links {
-    position: absolute; top: var(--nav-h-small); right: 16px;
-    flex-direction: column; gap: 14px; background: #0f1a30; border: 1px solid rgba(255,255,255,.12);
-    border-radius: 10px; padding: 12px 16px; box-shadow: 0 8px 24px rgba(0,0,0,.35);
-    display: none;
-  }
-  .nav-links.show { display: flex; }
-}
-
 /* SECTIONS */
 .section { @include section-pad; .container { text-align: center; } h2 { font-size: clamp(1.6rem,3.2vw,2.2rem); margin: 0 0 18px; color: $illini-blue; } }
 .section--alt { background: $muted; color: $text; }
