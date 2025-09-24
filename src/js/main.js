@@ -7,7 +7,21 @@ const progress=document.createElement('div');
 progress.className='nav__progress';
 navBar.appendChild(progress);
 
-function updateNavSize(){if(window.scrollY>10)navBar.classList.add('shrink');else navBar.classList.remove('shrink')}
+let isShrunk = false;
+const SHRINK_START = 24; 
+const SHRINK_END = 6;    
+
+function updateNavSize(){
+  const y = window.scrollY || document.documentElement.scrollTop || 0;
+  if (!isShrunk && y > SHRINK_START) {
+    navBar.classList.add('shrink');
+    isShrunk = true;
+  } else if (isShrunk && y < SHRINK_END) {
+    navBar.classList.remove('shrink');
+    isShrunk = false;
+  }
+}
+  
 function updateActiveLink(){
   const navHeight=navBar.getBoundingClientRect().height;
   const checkY=navHeight+2;

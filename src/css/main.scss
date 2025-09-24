@@ -7,6 +7,9 @@ $muted: #f6f8fb;
 $maxw: 1100px;
 $radius: 14px;
 
+:root { --navH: 72px; --navH-small: 56px; }
+
+
 @mixin container { width: min(92vw, #{$maxw}); margin-inline: auto; }
 @mixin section-pad { padding: clamp(48px, 7vw, 96px) 0; }
 @mixin btn {
@@ -25,12 +28,21 @@ img{ max-width:100%; height:auto; display:block }
 .container{ @include container }
 
 .navbar{
-  position:sticky; top:0; z-index:1000;
+//   position:sticky; top:0; z-index:1000;
   background:linear-gradient(180deg,rgba(19,41,75,.97),rgba(19,41,75,.90));
   box-shadow:0 6px 18px rgba(0,0,0,.18);
-  transition:padding .2s ease, backdrop-filter .2s ease;
-  padding:18px 0;
-  &.shrink{ padding:8px 0; backdrop-filter:blur(2px) }
+  position: sticky;
+  top: 0;
+  z-index: 9999; /* ensure it’s always above content */
+  min-height: var(--navH);
+  display: flex;
+  align-items: center;
+//   transition:padding .2s ease, backdrop-filter .2s ease;
+//   padding:18px 0;
+
+
+&.shrink{ min-height: var(--navH-small); backdrop-filter: blur(2px) }
+
   .nav{ display:flex; align-items:center; justify-content:space-between; }
   .brand{ color:#fff; text-decoration:none; font-weight:900; letter-spacing:.3px; font-size:clamp(1.1rem,2.2vw,1.35rem) }
   .nav__links{ display:flex; gap:clamp(10px,3vw,26px); list-style:none; margin:0; padding:0 }
@@ -154,8 +166,7 @@ img{ max-width:100%; height:auto; display:block }
 
 .btn{ @include btn }
 
-section{ scroll-margin-top:88px }
-.navbar.shrink ~ section{ scroll-margin-top:60px }
+
 
 @keyframes fadeIn{ from{ opacity:0; transform:translateY(4px) } to{ opacity:1; transform:none } }
 @keyframes pop{ from{ transform:scale(.98); opacity:.8 } to{ transform:scale(1); opacity:1 } }
@@ -184,3 +195,5 @@ section{ scroll-margin-top:88px }
 
 .modal__img{max-width:min(92vw, 900px); max-height:72vh; display:block; margin:0 auto; border-radius:12px}
 
+html { scroll-behavior: smooth; scroll-padding-top: var(--navH); }
+section { scroll-margin-top: var(--navH); }
