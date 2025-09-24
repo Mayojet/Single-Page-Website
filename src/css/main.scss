@@ -116,3 +116,11 @@ section { scroll-margin-top: 88px; }
 .navbar.shrink .nav__link{font-size:clamp(.88rem,1vw,.95rem)}
 
 .section--parallax{background:url("../assets/image.jpg") center/cover fixed no-repeat}
+
+.hero__icons{display:flex;gap:16px;justify-content:center;margin-top:12px}
+.hero__icon{display:grid;place-items:center;outline-offset:4px}
+.hero__icon img{width:36px;height:36px;display:block;transition:transform .12s ease;filter:drop-shadow(0 2px 8px rgba(0,0,0,.2))}
+.hero__icon:hover img{transform:translateY(-2px)}
+.hero__icon:focus-visible{outline:2px solid #fff;border-radius:10px}
+@media (min-width:1100px){.hero__icon img{width:40px;height:40px}}
+
