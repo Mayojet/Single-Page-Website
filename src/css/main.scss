@@ -117,71 +117,69 @@ img { max-width: 100%; height: auto; display: block; }
 // .carousel__btn:hover { background: rgba(0,0,0,.65); }
 // .carousel__btn.prev { left: 10px; }
 // .carousel__btn.next { right: 10px; }
+/* === Carousel (centered + “show full image”) === */
 .carousel {
     --slide-h: clamp(260px, 52vh, 440px);
     position: relative;
-    margin-top: 8px;
+    margin: 30px auto 0;
+    max-width: 1000px;      /* tweak if you want narrower/wider */
   }
   
   .carousel__viewport {
     overflow: hidden;
-    border-radius: 14px;
+    border-radius: 12px;
     box-shadow: 0 10px 24px rgba(0,0,0,.15);
-    background: #0b0b0b; /* backdrop for letterboxing on "contain" */
+    background: #0b0b0b;    /* letterbox background */
   }
   
   .carousel__track {
     display: flex;
-    gap: 0;                    /* no gaps between slides */
-    transition: transform .4s ease;
+    transition: transform 0.5s ease;
     will-change: transform;
   }
   
-  /* Reset the default figure margins that break centering */
-  .carousel .slide,
-  .carousel .slide figure { margin: 0; }
-  
-  /* Each slide occupies exactly one viewport width, content centered */
+  /* kill figure’s default margins and center content */
   .slide {
     flex: 0 0 100%;
     min-width: 100%;
     height: var(--slide-h);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;   /* centers the image horizontally */
+    margin: 0;                         /* important for centering */
     background: #0b0b0b;
-    text-align: center;
+    display: flex;                     /* centers the image */
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
+    padding: 0;                        /* no inner padding shift */
   }
   
-  /* Show full image (no cropping), centered both ways */
   .slide img {
     max-width: 100%;
     max-height: 100%;
     width: auto;
     height: auto;
-    object-fit: contain;       /* full view */
+    object-fit: contain;               /* show the whole image */
     display: block;
   }
   
-  /* Caption pinned to bottom */
   .slide figcaption {
     position: absolute;
     left: 0; right: 0; bottom: 0;
     padding: 10px 14px;
     color: #fff;
-    background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.65));
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,.6));
+    text-align: left;
     font-weight: 600;
   }
   
-  /* Arrows */
+  /* arrows */
   .carousel__btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,.45);
+    background: rgba(0,0,0,.55);
     color: #fff;
-    border: 0;
+    border: none;
     width: 44px; height: 44px;
     border-radius: 50%;
     cursor: pointer;
@@ -190,9 +188,10 @@ img { max-width: 100%; height: auto; display: block; }
     transition: background .15s ease;
     z-index: 2;
   }
-  .carousel__btn:hover { background: rgba(0,0,0,.65); }
+  .carousel__btn:hover { background: rgba(0,0,0,.75); }
   .carousel__btn.prev { left: 10px; }
   .carousel__btn.next { right: 10px; }
+  
   
 
 /* VIDEO */

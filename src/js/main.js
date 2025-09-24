@@ -82,40 +82,40 @@ onScroll(); // init once
 // prevBtn?.addEventListener('click', () => setSlide(index - 1));
 // nextBtn?.addEventListener('click', () => setSlide(index + 1));
 // Minimal, pixel-perfect slide movement
-const track = document.querySelector('.carousel__track');
+// === Carousel (matches .carousel__track / .slide / .carousel__btn) ===
+const track  = document.querySelector('.carousel__track');
 const slides = Array.from(document.querySelectorAll('.carousel .slide'));
-const prev  = document.querySelector('.carousel__btn.prev');
-const next  = document.querySelector('.carousel__btn.next');
+const prev   = document.querySelector('.carousel__btn.prev');
+const next   = document.querySelector('.carousel__btn.next');
 
-let idx = 0;
+let slideIndex = 0;
 
 function setSlide(n) {
   if (!track || !slides.length) return;
-  idx = (n + slides.length) % slides.length;
-  // move by one full slide (track’s width equals the viewport width)
-  track.style.transform = `translateX(-${idx * 100}%)`;
+  slideIndex = (n + slides.length) % slides.length;
+  track.style.transform = `translateX(-${slideIndex * 100}%)`;
 }
 
-prev?.addEventListener('click', () => setSlide(idx - 1));
-next?.addEventListener('click', () => setSlide(idx + 1));
+prev?.addEventListener('click', () => setSlide(slideIndex - 1));
+next?.addEventListener('click', () => setSlide(slideIndex + 1));
 window.addEventListener('load', () => setSlide(0));
 
-
-// Keyboard & touch support
+// optional keyboard + swipe
 const carousel = document.querySelector('.carousel');
 if (carousel) {
-  carousel.setAttribute('tabindex','0');
+  carousel.setAttribute('tabindex', '0');
   carousel.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft') setSlide(index - 1);
-    if (e.key === 'ArrowRight') setSlide(index + 1);
+    if (e.key === 'ArrowLeft')  setSlide(slideIndex - 1);
+    if (e.key === 'ArrowRight') setSlide(slideIndex + 1);
   });
 }
 let startX = 0;
 track?.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-track?.addEventListener('touchend', e => {
+track?.addEventListener('touchend',   e => {
   const dx = e.changedTouches[0].clientX - startX;
-  if (Math.abs(dx) > 40) { dx < 0 ? setSlide(index + 1) : setSlide(index - 1); }
+  if (Math.abs(dx) > 40) setSlide(slideIndex + (dx < 0 ? 1 : -1));
 });
+
 
 // ===== MODALS =====
 function openModal(sel){
