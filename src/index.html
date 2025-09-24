@@ -16,7 +16,6 @@
         <li><a class="nav__link" href="#about">About</a></li>
         <li><a class="nav__link" href="#gallery">Gallery</a></li>
         <li><a class="nav__link" href="#video">Video</a></li>
-        <li><a class="nav__link" href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -39,38 +38,50 @@
     </div>
   </section>
   
-  
-
-  <section id="about" class="section">
+  <section id="about" class="section section--alt">
     <div class="container">
       <h2>About</h2>
-      <div class="columns">
-        <p>Sticky navbar with resize.</p>
-        <p>Active section indicator and smooth scrolling.</p>
-        <p>Carousel, modal, video, animation.</p>
-        <p>Multi-column content.</p>
-        <p>Responsive sections.</p>
-        <p>No libraries.</p>
+      <div class="about__text columns">
+        <p>In my spare time, I love playing soccer, Hearthstone, and Pokémon Trading Card Game. I have won the Midwest Soccer Cup in soccer. I am an active Hearthstone player who ranks top 300 online regularly.</p>
+        <p>For Pokémon TCG, I collect and play competitively, favoring fast tempo decks and prize-race strategies. I enjoy deck building, trading, and attending local league events.</p>
+        <p>Here is a gallery of my hobbies below.</p>
       </div>
     </div>
   </section>
+  
 
-  <section id="gallery" class="section section--alt">
+
+  <section id="gallery" class="section">
     <div class="container">
       <h2>Gallery</h2>
+  
       <div class="carousel" aria-roledescription="carousel">
         <button class="carousel__btn prev" aria-label="Previous">❮</button>
         <div class="carousel__viewport">
           <div class="carousel__track">
-            <figure class="slide"><img src="assets/image.jpg" alt="Slide 1"><figcaption>Slide One</figcaption></figure>
-            <figure class="slide"><img src="assets/image.jpg" alt="Slide 2"><figcaption>Slide Two</figcaption></figure>
-            <figure class="slide"><img src="assets/image.jpg" alt="Slide 3"><figcaption>Slide Three</figcaption></figure>
+            <figure class="slide"><img src="assets/Soccer.png" alt="Soccer"><figcaption>Soccer</figcaption></figure>
+            <figure class="slide"><img src="assets/hearthstone.png" alt="Hearthstone"><figcaption>Hearthstone</figcaption></figure>
+            <figure class="slide"><img src="assets/pokemon.png" alt="Pokémon"><figcaption>Pokémon</figcaption></figure>
           </div>
         </div>
         <button class="carousel__btn next" aria-label="Next">❯</button>
       </div>
+  
+      <h3 class="mt">Badges</h3>
+      <div class="badge-grid">
+        <a href="assets/1.png"><img src="assets/1.png" alt="Badge 1"></a>
+        <a href="assets/2.png"><img src="assets/2.png" alt="Badge 2"></a>
+        <a href="assets/3.png"><img src="assets/3.png" alt="Badge 3"></a>
+        <a href="assets/4.png"><img src="assets/4.png" alt="Badge 4"></a>
+        <a href="assets/5.png"><img src="assets/5.png" alt="Badge 5"></a>
+        <a href="assets/6.png"><img src="assets/6.png" alt="Badge 6"></img></a>
+        <a href="assets/7.png"><img src="assets/7.png" alt="Badge 7"></a>
+        <a href="assets/8.png"><img src="assets/8.png" alt="Badge 8"></a>
+        <a href="assets/9.png"><img src="assets/9.png" alt="Badge 9"></a>
+      </div>
     </div>
   </section>
+  
 
   <section class="section section--parallax" aria-label="Parallax">
     <div class="container">
@@ -82,12 +93,14 @@
   <section id="video" class="section section--alt">
     <div class="container">
       <h2>Video</h2>
-      <video class="player" controls preload="metadata" poster="assets/image.jpg">
-        <source src="assets/sample.mp4" type="video/mp4" />
-        Video unsupported.
+      <p>Looking forward to connect! Please message me if you want to talk about anything!</p>
+      <video class="player" autoplay loop muted playsinline>
+        <source src="assets/video1.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
       </video>
     </div>
   </section>
+  
 
   <section id="contact" class="section">
     <div class="container">
@@ -106,6 +119,8 @@
     </div>
   </div>
 
+  
+
   <footer class="footer">
     <div class="container footer__inner">
       <p>© 2025 Your Name</p>
@@ -122,6 +137,15 @@
       </nav>
     </div>
   </footer>
+
+  <div id="imgModal" class="modal" aria-hidden="true" role="dialog" aria-label="Image viewer">
+    <div class="modal__backdrop" data-modal-close></div>
+    <div class="modal__dialog">
+      <button class="modal__close" aria-label="Close" data-modal-close>×</button>
+      <img class="modal__img" alt="">
+    </div>
+  </div>
+  
 </body>
 </html>
 

@@ -103,3 +103,15 @@ document.querySelectorAll('.modal__backdrop').forEach(b=>{
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>{closeModal(m);lastFocus?.focus()})
 });
+
+const imgModal=document.getElementById('imgModal');
+const imgEl=imgModal?.querySelector('.modal__img');
+document.querySelectorAll('.badge-grid a').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const src=a.getAttribute('href');
+    if(!src||!imgModal||!imgEl) return;
+    imgEl.src=src;
+    openModal('#imgModal');
+  });
+});
