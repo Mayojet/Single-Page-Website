@@ -16,7 +16,7 @@ function onScroll() {
     navWrap.classList.remove('small');
   }
 
-  // Progress
+  // Progress bar
   if (progressBar) {
     const doc = document.documentElement;
     const max = doc.scrollHeight - doc.clientHeight;
@@ -33,8 +33,9 @@ function onScroll() {
     const bottom = top + sec.offsetHeight;
     if (window.scrollY >= top && window.scrollY < bottom) { active = i; break; }
   }
+  // Ensure last item is active at absolute page bottom
   if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 1) {
-    active = sections.length - 1; // last item at absolute bottom
+    active = sections.length - 1;
   }
 
   navLinks.forEach(l => l.classList.remove('active'));
@@ -44,7 +45,7 @@ window.addEventListener('scroll', onScroll, { passive: true });
 window.addEventListener('resize', onScroll);
 window.addEventListener('load', onScroll);
 
-// Smooth scroll with offset (so sections don't hide under the navbar)
+// Smooth scroll with navbar offset
 navLinks.forEach(link => {
   link.addEventListener('click', e => {
     const href = link.getAttribute('href');
@@ -58,16 +59,15 @@ navLinks.forEach(link => {
   });
 });
 
-// Mobile menu
+// Mobile menu toggle
 const hamburger = document.getElementById('hamburger');
 const navLinksContainer = document.getElementById('navLinks');
 hamburger?.addEventListener('click', () => navLinksContainer?.classList.toggle('show'));
 navLinks.forEach(link => link.addEventListener('click', () => navLinksContainer?.classList.remove('show')));
 
-onScroll(); // init
+onScroll(); // init once
 
-// ===== CAROUSEL (safe-guarded) =====
-const carousel = document.querySelector('.carousel');
+// ===== CAROUSEL =====
 const track = document.querySelector('.carousel__track');
 const slides = track ? [...track.querySelectorAll('.slide')] : [];
 const prevBtn = document.querySelector('.carousel__btn.prev');
@@ -82,6 +82,8 @@ function setSlide(i) {
 prevBtn?.addEventListener('click', () => setSlide(index - 1));
 nextBtn?.addEventListener('click', () => setSlide(index + 1));
 
+// Keyboard & touch support
+const carousel = document.querySelector('.carousel');
 if (carousel) {
   carousel.setAttribute('tabindex','0');
   carousel.addEventListener('keydown', e => {
@@ -131,7 +133,7 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-// Badge grid -> image modal
+// Badge grid image → modal
 const imgModal = document.getElementById('imgModal');
 const imgEl = imgModal?.querySelector('.modal__img');
 document.querySelectorAll('.badge-grid a').forEach(a=>{
@@ -143,4 +145,3 @@ document.querySelectorAll('.badge-grid a').forEach(a=>{
     openModal('#imgModal');
   });
 });
-
