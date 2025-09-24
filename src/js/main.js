@@ -68,19 +68,38 @@ navLinks.forEach(link => link.addEventListener('click', () => navLinksContainer?
 onScroll(); // init once
 
 // ===== CAROUSEL =====
-const track = document.querySelector('.carousel__track');
-const slides = track ? [...track.querySelectorAll('.slide')] : [];
-const prevBtn = document.querySelector('.carousel__btn.prev');
-const nextBtn = document.querySelector('.carousel__btn.next');
-let index = 0;
+// const track = document.querySelector('.carousel__track');
+// const slides = track ? [...track.querySelectorAll('.slide')] : [];
+// const prevBtn = document.querySelector('.carousel__btn.prev');
+// const nextBtn = document.querySelector('.carousel__btn.next');
+// let index = 0;
 
-function setSlide(i) {
+// function setSlide(i) {
+//   if (!track || !slides.length) return;
+//   index = (i + slides.length) % slides.length;
+//   track.style.transform = `translateX(-${index * 100}%)`;
+// }
+// prevBtn?.addEventListener('click', () => setSlide(index - 1));
+// nextBtn?.addEventListener('click', () => setSlide(index + 1));
+// Minimal, pixel-perfect slide movement
+const track = document.querySelector('.carousel__track');
+const slides = Array.from(document.querySelectorAll('.carousel .slide'));
+const prev  = document.querySelector('.carousel__btn.prev');
+const next  = document.querySelector('.carousel__btn.next');
+
+let idx = 0;
+
+function setSlide(n) {
   if (!track || !slides.length) return;
-  index = (i + slides.length) % slides.length;
-  track.style.transform = `translateX(-${index * 100}%)`;
+  idx = (n + slides.length) % slides.length;
+  // move by one full slide (track’s width equals the viewport width)
+  track.style.transform = `translateX(-${idx * 100}%)`;
 }
-prevBtn?.addEventListener('click', () => setSlide(index - 1));
-nextBtn?.addEventListener('click', () => setSlide(index + 1));
+
+prev?.addEventListener('click', () => setSlide(idx - 1));
+next?.addEventListener('click', () => setSlide(idx + 1));
+window.addEventListener('load', () => setSlide(0));
+
 
 // Keyboard & touch support
 const carousel = document.querySelector('.carousel');
