@@ -8,16 +8,28 @@
   <script src="js/main.js" defer></script>
 </head>
 <body>
-  <header class="navbar">
-    <nav class="nav container">
-      <a class="brand" href="#home">Site</a>
-      <ul class="nav__links">
-        <li><a class="nav__link" href="#home">Home</a></li>
-        <li><a class="nav__link" href="#about">About</a></li>
-        <li><a class="nav__link" href="#gallery">Gallery</a></li>
-        <li><a class="nav__link" href="#video">Video</a></li>
+<!-- NAV -->
+<div class="nav-wrap large">
+    <nav class="navbar">
+      <a class="brand" href="#home">
+        <span class="brand-icon">YM</span>
+        <span class="brand-text">Yujie Miao</span>
+      </a>
+  
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </div>
+  
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav__link">Home</a></li>
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#gallery" class="nav__link">Gallery</a></li>
+        <li><a href="#video" class="nav__link">Video</a></li>
       </ul>
     </nav>
+    <div class="progress"><span id="progressBar"></span></div>
+  </div>
+  
   </header>
 
   <section id="home">

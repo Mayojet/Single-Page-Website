@@ -26,36 +26,121 @@ html{ scroll-behavior:smooth }
 body{ margin:0; font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:$text; background:$paper }
 img{ max-width:100%; height:auto; display:block }
 .container{ @include container }
-
-.navbar{
-//   position:sticky; top:0; z-index:1000;
-  background:linear-gradient(180deg,rgba(19,41,75,.97),rgba(19,41,75,.90));
-  box-shadow:0 6px 18px rgba(0,0,0,.18);
-  position: sticky;
-  top: 0;
-  z-index: 9999; /* ensure it’s always above content */
-  min-height: var(--navH);
-  display: flex;
-  align-items: center;
-//   transition:padding .2s ease, backdrop-filter .2s ease;
-//   padding:18px 0;
-
-
-&.shrink{ min-height: var(--navH-small); backdrop-filter: blur(2px) }
-
-  .nav{ display:flex; align-items:center; justify-content:space-between; }
-  .brand{ color:#fff; text-decoration:none; font-weight:900; letter-spacing:.3px; font-size:clamp(1.1rem,2.2vw,1.35rem) }
-  .nav__links{ display:flex; gap:clamp(10px,3vw,26px); list-style:none; margin:0; padding:0 }
-  .nav__link{
-    color:#dbe7ff; text-decoration:none; font-weight:700; position:relative; padding:.2rem 0; font-size:clamp(.95rem,1.2vw,1.05rem);
-    &::after{ content:""; position:absolute; left:0; bottom:-6px; width:0%; height:3px; background:$illini-orange; border-radius:3px; transition:width .18s ease }
-    &:hover{ color:#fff; &::after{ width:100% } }
-    &.active{ color:#fff; &::after{ width:100% } }
+:root {
+    --bg: #0d1117;
+    --ink: #f9fafb;
+    --muted: #cbd5e1;
+    --accent: #E84A27;   /* Illini orange */
+    --accent-2: #3b82f6; /* blue accent for gradients */
+    --line: #1f2937;
+    --card: #ffffff;
+    --maxw: 1100px;
+    --nav-h: 92px;
+    --nav-h-small: 56px;
   }
-}
-.nav__progress{ position:absolute; left:0; bottom:0; height:3px; background:$illini-orange; width:0 }
-.navbar.shrink .brand{ font-size:clamp(1rem,2vw,1.15rem) }
-.navbar.shrink .nav__link{ font-size:clamp(.88rem,1vw,.95rem) }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font: 16px/1.6 system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+  
+  /* NAVBAR */
+  .nav-wrap {
+    position: fixed; top: 0; left: 0; width: 100%;
+    background: rgba(19,41,75, 0.88);            /* Illini blue w/ translucency */
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    z-index: 1000;
+    transition: height .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .navbar {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  
+  /* brand */
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand-icon {
+    width: 40px; height: 40px; border-radius: 10px; color: #fff;
+    display: grid; place-items: center; font-weight: 700;
+    background: linear-gradient(270deg, var(--accent), var(--accent-2));
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+  .brand-text { color: var(--ink); letter-spacing: .5px; transition: font-size .25s ease; }
+  
+  /* links */
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    position: relative; color: var(--muted); text-decoration: none; font-weight: 600;
+    transition: color .2s ease, font-size .25s ease;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 0; bottom: -6px; height: 2px; width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transition: width .3s ease;
+  }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  
+  /* sizes when top vs scrolled */
+  .nav-wrap.large .brand-text { font-size: 26px; }
+  .nav-wrap.large .nav-links a { font-size: 18px; }
+  .nav-wrap.small .brand-text { font-size: 18px; }
+  .nav-wrap.small .nav-links a { font-size: 14px; }
+  
+  /* progress bar */
+  .progress { height: 3px; background: transparent; }
+  #progressBar { display: block; height: 100%; width: 0;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  }
+  
+  /* anchor offset + smooth scroll */
+  html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+  section { scroll-margin-top: var(--nav-h); }
+  
+  /* hamburger (mobile) */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 26px; height: 3px; background: #fff; border-radius: 2px; transition: all .3s ease; }
+  
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .nav-links {
+      position: absolute; top: var(--nav-h-small); right: 16px;
+      flex-direction: column; gap: 16px; background: #111; border: 1px solid var(--line);
+      border-radius: 8px; padding: 12px 16px; box-shadow: 0 4px 12px rgba(0,0,0,.3);
+      display: none;
+    }
+    .nav-links.show { display: flex; }
+  }
+  
+// .navbar{
+// //   position:sticky; top:0; z-index:1000;
+//   background:linear-gradient(180deg,rgba(19,41,75,.97),rgba(19,41,75,.90));
+//   box-shadow:0 6px 18px rgba(0,0,0,.18);
+//   position: sticky;
+//   top: 0;
+//   z-index: 9999; /* ensure it’s always above content */
+//   min-height: var(--navH);
+//   display: flex;
+//   align-items: center;
+// //   transition:padding .2s ease, backdrop-filter .2s ease;
+// //   padding:18px 0;
+
+// &.shrink{ min-height: var(--navH-small); backdrop-filter: blur(2px) }
+
+//   .nav{ display:flex; align-items:center; justify-content:space-between; }
+//   .brand{ color:#fff; text-decoration:none; font-weight:900; letter-spacing:.3px; font-size:clamp(1.1rem,2.2vw,1.35rem) }
+//   .nav__links{ display:flex; gap:clamp(10px,3vw,26px); list-style:none; margin:0; padding:0 }
+//   .nav__link{
+//     color:#dbe7ff; text-decoration:none; font-weight:700; position:relative; padding:.2rem 0; font-size:clamp(.95rem,1.2vw,1.05rem);
+//     &::after{ content:""; position:absolute; left:0; bottom:-6px; width:0%; height:3px; background:$illini-orange; border-radius:3px; transition:width .18s ease }
+//     &:hover{ color:#fff; &::after{ width:100% } }
+//     &.active{ color:#fff; &::after{ width:100% } }
+//   }
+// }
+// .nav__progress{ position:absolute; left:0; bottom:0; height:3px; background:$illini-orange; width:0 }
+// .navbar.shrink .brand{ font-size:clamp(1rem,2vw,1.15rem) }
+// .navbar.shrink .nav__link{ font-size:clamp(.88rem,1vw,.95rem) }
 
 .section{ @include section-pad; .container{ text-align:center } h2{ font-size:clamp(1.6rem,3.2vw,2.2rem); margin:0 0 18px } }
 .section--alt{ background:$muted }
